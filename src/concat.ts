@@ -5,7 +5,8 @@ export function concat<T>(...data: LazyIterable<T>[]) {
   if (data.some(isAsyncIterable) || data.some(datum => datum instanceof Promise)) {
     return {
       async *[Symbol.asyncIterator]() {
-        for await (let datum of await Promise.all(data)) yield* datum
+        const stream = await Promise.all(data)
+        for await (let datum of stream) yield* datum
       },
     }
   }
