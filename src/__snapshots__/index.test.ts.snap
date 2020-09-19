@@ -36,6 +36,7 @@ Object {
   "tap": [Function],
   "toArray": [Function],
   "unique": [Function],
+  "wait": [Function],
   "where": [Function],
   "zip": [Function],
 }
