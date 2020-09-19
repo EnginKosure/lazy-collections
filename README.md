@@ -65,6 +65,7 @@ program(range(0, 1000000));
     - [`chunk`](#chunk)
     - [`compact`](#compact)
     - [`delay`](#delay)
+    - [`eager`](#eager)
     - [`flatten`](#flatten)
     - [`generate`](#generate)
     - [`groupBy`](#groupby)
@@ -452,6 +453,28 @@ const program = pipe(
 
 await program();
 // [ '10:00:00', '10:00:05', '10:00:10', '10:00:15', '10:00:20' ];
+```
+
+#### `eager`
+
+[Table of contents](#table-of-contents)
+
+This will call up to `N` amount of items in the stream immediately and wait for them in the correct
+order. If you have a list of API calls, then you can use this method to start calling the API in
+batches of `N` instead of waiting for each API call sequentially.
+
+```js
+import { pipe, range, map, eager, toArray } from 'lazy-collections'
+
+const program = pipe(
+  range(0, 9),
+  map(() => fetch(`/users/${id}`)),
+  eager(5), // Will create 2 "batches" of 5 API calls
+  toArray()
+)
+
+await program()
+// [ User1, User2, User3, User4, User5, User6, User7, User8, User9, User10 ];
 ```
 
 #### `flatten`

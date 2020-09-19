@@ -8,6 +8,7 @@ Object {
   "compose": [Function],
   "concat": [Function],
   "delay": [Function],
+  "eager": [Function],
   "every": [Function],
   "filter": [Function],
   "find": [Function],
